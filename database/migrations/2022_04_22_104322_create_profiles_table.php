@@ -30,6 +30,43 @@ class CreateProfilesTable extends Migration
             $table->string('closest_person');
             $table->timestamps();
         });
+
+        Schema::create('academic_records', function (Blueprint $table) {
+            $table->id();
+            $table->bigInteger('profile_id');
+            $table->string('educational_stage');
+            $table->string('institution_name');
+            $table->string('major');
+            $table->year('graduation_year');
+            $table->decimal('gpa');
+            $table->timestamps();
+        });
+
+        Schema::create('training_records', function (Blueprint $table) {
+            $table->id();
+            $table->bigInteger('profile_id');
+            $table->string('course_name');
+            $table->boolean('is_certificate');
+            $table->year('year');
+            $table->timestamps();
+        });
+
+        Schema::create('job_records', function (Blueprint $table) {
+            $table->id();
+            $table->bigInteger('profile_id');
+            $table->string('company_name');
+            $table->string('last_position');
+            $table->string('last_income');
+            $table->year('year');
+            $table->timestamps();
+        });
+
+        Schema::create('skills', function (Blueprint $table) {
+            $table->id();
+            $table->bigInteger('profile_id');
+            $table->string('title');
+            $table->timestamps();
+        });
     }
 
     /**
@@ -40,5 +77,9 @@ class CreateProfilesTable extends Migration
     public function down()
     {
         Schema::dropIfExists('profiles');
+        Schema::dropIfExists('academic_records');
+        Schema::dropIfExists('training_records');
+        Schema::dropIfExists('job_records');
+        Schema::dropIfExists('skills');
     }
 }
