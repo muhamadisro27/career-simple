@@ -16,18 +16,18 @@ class CreateProfilesTable extends Migration
         Schema::create('profiles', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->integer('id_card_number');
-            $table->string('birthplace');
-            $table->date('birthdate');
+            $table->string('id_card_number');
+            $table->string('birthplace')->nullable();
+            $table->date('birthdate')->nullable();
             $table->string('sex');
-            $table->string('religion');
-            $table->string('blood_type');
-            $table->string('status');
-            $table->longText('address');
-            $table->longText('address_domicile');
+            $table->string('religion')->nullable();
+            $table->string('blood_type')->nullable();
+            $table->string('status')->nullable();
+            $table->longText('address')->nullable();
+            $table->longText('address_domicile')->nullable();
             $table->string('email');
-            $table->string('phone_number');
-            $table->string('closest_person');
+            $table->string('phone_number')->nullable();
+            $table->string('closest_person')->nullable();
             $table->timestamps();
         });
 

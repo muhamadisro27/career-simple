@@ -63,7 +63,10 @@
            <p class="fw-light text-muted mb-0">allenmoreno@gmail.com</p>
          </div>
          <a href="{{ route('profile.edit') }}" class="dropdown-item"><i class="dropdown-item-icon mdi mdi-account-outline text-primary me-2"></i> My Profile</a>
-         <a class="dropdown-item"><i class="dropdown-item-icon mdi mdi-power text-primary me-2"></i>Sign Out</a>
+         <form action="{{ route('logout') }}" method="post">
+          @csrf
+          <button type="submit" class="dropdown-item"><i class="dropdown-item-icon mdi mdi-power text-primary me-2"></i>Sign Out</button>
+         </form>
        </div>
      </li>
    </ul>
