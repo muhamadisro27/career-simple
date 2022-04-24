@@ -1,6 +1,7 @@
 <?php
 
 use App\Providers\RepositoryServiceProvider;
+use Spatie\Permission\PermissionServiceProvider;
 
 return [
 
@@ -177,6 +178,7 @@ return [
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
         App\Providers\RepositoryServiceProvider::class,
+        Spatie\Permission\PermissionServiceProvider::class,
 
     ],
 
