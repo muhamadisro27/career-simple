@@ -33,8 +33,8 @@ class CandidateRepository implements CandidateInterface {
    public function jobCandidate()
    {
       try {
-         $applies = CandidateApply::with(['candidate.profile','job'])->latest()->paginate(10);
-
+         $applies = CandidateApply::filterSearch()->with(['candidate.profile','job'])->latest()->paginate(10);
+         
          $response = [
             'status' => 'success',
             'applies' => $applies

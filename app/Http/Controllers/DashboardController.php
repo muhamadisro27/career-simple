@@ -16,7 +16,7 @@ class DashboardController extends Controller
     public function index()
     {
         $response = $this->candidateService->jobCandidate();
-
+    // dd($response);
         return view('pages.dashboard.index', $response);
     }
 

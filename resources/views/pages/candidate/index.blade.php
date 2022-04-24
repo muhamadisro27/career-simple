@@ -5,12 +5,12 @@
 <div class="row">
    <div class="col-sm-12 d-flex flex-column">
      <div class="row flex-grow">
+       @if (session()->has('success'))
+         <div class="alert alert-success mb-5">
+           {{ session('success') }}
+         </div>
+       @endif
        <div class="col-12 grid-margin stretch-card">
-        @if (session()->has('success'))
-          <div class="alert alert-success mb-5">
-            {{ session('success') }}
-          </div>
-        @endif
          <div class="card card-rounded">
            <div class="card-body">
              <div class="d-sm-flex justify-content-between align-items-start">

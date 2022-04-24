@@ -16,6 +16,11 @@
                {{-- <div>
                  <button class="btn btn-primary btn-lg text-white mb-0 me-0" type="button"><i class="mdi mdi-account-plus"></i>Add new member</button>
                </div> --}}
+               <div>
+                  <form class="search-form" action="{{ route('dashboard') }}" method="get">
+                     <input type="search" class="form-control" name="search" placeholder="Search Here" title="Search here">
+                  </form>
+               </div>
              </div>
              <div class="table-responsive  mt-1">
               <table class="table select-table">

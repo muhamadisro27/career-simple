@@ -27,4 +27,37 @@ class CandidateApply extends Model
     {
         return $this->belongsTo(Job::class, 'job_id');
     }
+
+    public static function filterSearch()
+    {
+        $response = CandidateApply::with(['candidate.profile.academicRecord','job']);
+
+        if (request()->has('search')) {
+             $response->whereHas('candidate.profile', function ($q) {
+                        $q->where('name', 'like', '%' . request('search'). '%');
+                    });
+            // switch($response) {
+            //     case 'name' :
+            //         $response->whereHas('candidate.profile', function ($q) {
+            //             $q->where('name', 'like', '%' . request('search'). '%');
+            //         });
+            //         break;
+            //     case 'educational_stage' :
+            //         $response->whereHas('candidate.profile.academicRecord', function ($q) {
+            //             $q->where('educational_stage', 'like', '%' . request('search'). '%');
+            //         });
+            //         break;
+            //     case 'title' :
+            //         $response->whereHas('job', function ($q) {
+            //             $q->where('title', 'like', '%' . request('search'). '%');
+            //         }); 
+            //         break;
+            //     default:
+            //         $response;
+            //         break;
+            // }
+        }
+        
+        return $response;
+    }
 }

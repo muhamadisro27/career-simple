@@ -16,7 +16,7 @@
              <form action="{{ route('login') }}" method="post" class="pt-3">
               @csrf
                <div class="form-group">
-                 <input type="email" name="email" class="form-control form-control-lg @error('email') is-invalid @enderror" placeholder="Email">
+                 <input type="email" autocomplete="off" name="email" class="form-control form-control-lg @error('email') is-invalid @enderror" placeholder="Email">
                </div>
                @error('email')
                  <div class="invalid-feedback">
