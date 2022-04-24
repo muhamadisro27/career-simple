@@ -5,6 +5,7 @@ namespace App\Http\Repositories;
 
 use App\Models\Skill;
 use App\Models\Profile;
+use App\Models\Candidate;
 use App\Models\JobRecord;
 use App\Models\AcademicRecord;
 use App\Models\TrainingRecord;
@@ -22,6 +23,7 @@ class ProfileRepository implements ProfileInterface {
          'job' => JobRecord::where(['profile_id' => auth()->user()->profile_id])->first(),
          'training' => TrainingRecord::where(['profile_id' => auth()->user()->profile_id])->first(),
          'skill' => Skill::where(['profile_id' => auth()->user()->profile_id])->first(),
+         'candidate' => Candidate::where(['profile_id' => auth()->user()->profile_id])->first(),
      ];
 
      return $data;
@@ -29,6 +31,7 @@ class ProfileRepository implements ProfileInterface {
 
    public function update($data)
    {
+
       try {
          DB::beginTransaction();
 
@@ -96,7 +99,21 @@ class ProfileRepository implements ProfileInterface {
             'title' => $data['skill_title'],
          ]);
 
-         
+         if($data['is_willing_placed'] == 'true')
+         {
+            $data['is_willing_placed'] = true;
+         } else {
+            $data['is_willing_placed'] = false;
+         }
+
+         Candidate::updateOrCreate(
+         [
+            'id' => $data['candidate_id'] ?? null
+         ],[
+            'profile_id' => auth()->user()->profile_id,
+            'salary_expected' => $data['salary_expected'],
+            'is_willing_placed' => $data['is_willing_placed'],
+         ]);        
 
          DB::commit();
 

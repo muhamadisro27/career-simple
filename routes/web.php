@@ -31,9 +31,9 @@ Route::middleware('guest')->group(function() {
         Route::get('/register', 'registerForm')->name('register-form');
         Route::post('/register', 'register')->name('register');
     });
-    // Job list
-    Route::get('job', [JobController::class, 'index'])->name('job');
 });
+// Job list
+Route::get('job', [JobController::class, 'index'])->name('job');
 
 // Route Auth
 Route::middleware('auth')->group(function() {
@@ -47,7 +47,10 @@ Route::middleware('auth')->group(function() {
         Route::get('/dashboard', 'index');
     });
     // Candidate
-    Route::resource('/candidate', CandidateController::class)->middleware('role:user');
+    Route::middleware('role:user')->group(function() {
+        Route::post('/candidate/{job}', [CandidateController::class, 'applyJob'])->name('candidate.apply');
+        Route::resource('/candidate', CandidateController::class);
+    });
 
     // Logout
     Route::post('/logout', [AuthController::class, 'logout'])->name('logout');

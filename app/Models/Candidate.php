@@ -10,7 +10,7 @@ class Candidate extends Model
     use HasFactory;
 
     protected $fillable = [
-        'profiles_id',
+        'profile_id',
         'salary_expected',
         'is_willing_placed',
     ];
@@ -22,7 +22,7 @@ class Candidate extends Model
 
     public function profile()
     {
-        return $this->belongsTo(Profile::class, 'profiles_id');
+        return $this->belongsTo(Profile::class, 'profile_id');
     }
 
     public function appliedJob()

@@ -2,10 +2,16 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Job;
 use Illuminate\Http\Request;
+use App\Http\Services\CandidateService;
 
 class CandidateController extends Controller
 {
+    public function __construct(CandidateService $candidateService)
+    {
+        $this->candidateService = $candidateService;
+    }
     /**
      * Display a listing of the resource.
      *
@@ -13,7 +19,9 @@ class CandidateController extends Controller
      */
     public function index()
     {
-        return view('pages.candidate.index');
+        $response = $this->candidateService->paginate();
+
+        return view('pages.candidate.index', $response);
     }
 
     /**
@@ -80,5 +88,12 @@ class CandidateController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function applyJob(Job $job)
+    {
+        $response = $this->candidateService->apply($job);
+
+        return redirect('/candidate')->with($response['status'],$response['message']);
     }
 }

@@ -19,6 +19,7 @@
          <input type="hidden" name="job_id" value="{{ old('job_id', $job ? $job->id : null) }}" />
          <input type="hidden" name="training_id" value="{{ old('training_id', $training ? $training->id : null) }}" />
          <input type="hidden" name="skill_id" value="{{ old('skill_id', $skill ? $skill->id : null) }}" />
+         <input type="hidden" name="candidate_id" value="{{ old('candidate_id', $candidate ? $candidate->id : null) }}" />
          <p class="card-description">
            Personal info
          </p>
@@ -337,6 +338,29 @@
                 </div>
               </div>
             </div>
+            {{-- Salary Expected --}}
+            <div class="col-md-6">
+              <div class="form-group row">
+                <label class="col-sm-3 col-form-label">Salary Expected</label>
+                <div class="col-sm-9">
+                  <input type="text" name="salary_expected" value="{{ old('salary_expected', $candidate ? $candidate->salary_expected : null) }}" class="form-control" />
+                </div>
+              </div>
+            </div>
+         </div>
+         <div class="row">
+           {{-- Willing --}}
+           <div class="col-md-6">
+            <div class="form-group row">
+              <label class="col-sm-3 col-form-label">Willing to be placed anywhere</label>
+              <div class="col-sm-9">
+                <select name="is_willing_placed" class="form-control">
+                  <option value="true">Ya</option>
+                  <option value="false">Tidak</option>
+                </select>
+              </div>
+            </div>
+          </div>
          </div>
          {{-- Button --}}
          <div class="d-flex flex-row justify-content-end">

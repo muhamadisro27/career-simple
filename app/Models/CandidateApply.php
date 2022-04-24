@@ -15,7 +15,6 @@ class CandidateApply extends Model
     ];
 
     protected $hidden = [
-        'created_at',
         'updated_at',
     ];
 
@@ -26,6 +25,6 @@ class CandidateApply extends Model
 
     public function job()
     {
-        return $this->belongsTo(Candidate::class, 'job_id');
+        return $this->belongsTo(Job::class, 'job_id');
     }
 }
