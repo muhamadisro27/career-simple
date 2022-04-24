@@ -22,7 +22,7 @@ use App\Http\Controllers\DashboardController;
 // Route Guest
 // Login
 Route::controller(AuthController::class)->group(function() {
-    Route::get('/', 'loginForm');
+    Route::get('/', 'loginForm')->name('login-form');
     Route::post('/', 'login')->name('login');
 });
 // Register
