@@ -2,9 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use Illuminate\Http\Request;
 use App\Http\Services\AuthService;
 use App\Http\Requests\LoginRequest;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 use App\Http\Requests\RegisterRequest;
 
 class AuthController extends Controller
@@ -19,9 +22,20 @@ class AuthController extends Controller
         return view('pages.auth.login');
     }
 
-    public function login(LoginRequest $request)
+    public function login(Request $request)
     {
-        // return redirect('/profile')->with();
+       $credentials = $request->validate([
+            'email' => 'required|email:dns',
+            'password' => 'required'
+       ]);
+
+       if(Auth::attempt($credentials)) {
+           $request->session()->regenerate();
+
+           return redirect()->intended('candidate');
+
+        }
+        return redirect()->back()->with('login', 'Login failed');
     }
 
     public function registerForm()

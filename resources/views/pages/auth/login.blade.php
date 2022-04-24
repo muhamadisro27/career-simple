@@ -9,12 +9,23 @@
            <div class="auth-form-light text-left py-5 px-4 px-sm-5">
              <h4>Hello! let's get started</h4>
              <form action="{{ route('login') }}" method="post" class="pt-3">
+              @csrf
                <div class="form-group">
-                 <input type="email" class="form-control form-control-lg" id="exampleInputEmail1" placeholder="Email">
+                 <input type="email" name="email" class="form-control form-control-lg @error('email') is-invalid @enderror" placeholder="Email">
                </div>
+               @error('email')
+                 <div class="invalid-feedback">
+                   {{ $message }}
+                 </div>
+               @enderror
                <div class="form-group">
-                 <input type="password" class="form-control form-control-lg" id="exampleInputPassword1" placeholder="Password">
+                 <input type="password" name="password" class="form-control form-control-lg @error('password') is-invalid @enderror" placeholder="Password">
                </div>
+               @error('password')
+               <div class="invalid-feedback">
+                 {{ $message }}
+               </div>
+             @enderror
                <div class="mt-3 d-flex flex-row justify-content-end">
                   <button type="submit" class="btn btn-primary text-light btn-rounded btn-fw">Login</button>
                </div>

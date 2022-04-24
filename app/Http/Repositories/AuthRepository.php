@@ -55,11 +55,6 @@ class AuthRepository implements AuthInterface {
       }
       return $response;
    }
-
-   public function login($data)
-   {
-      
-   }
 }
 
 
