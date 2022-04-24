@@ -2,10 +2,11 @@
 
 namespace App\Http\Middleware;
 
-use App\Providers\RouteServiceProvider;
 use Closure;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use App\Providers\RouteServiceProvider;
 
 class RedirectIfAuthenticated
 {
@@ -23,7 +24,13 @@ class RedirectIfAuthenticated
 
         foreach ($guards as $guard) {
             if (Auth::guard($guard)->check()) {
-                return redirect(RouteServiceProvider::HOME);
+                $user = User::find(auth()->user()->id);
+                
+                if($user->hasRole('admin')) {
+                    return redirect()->route('dashboard');
+                } else {
+                    return redirect('/candidate');
+                }
             }
         }
 
