@@ -37,6 +37,8 @@ class AuthRepository implements AuthInterface {
                'password' => bcrypt($data['password']),
          ]);
 
+         $user->assignRole('user');
+
          auth()->login($user);
 
          DB::commit();

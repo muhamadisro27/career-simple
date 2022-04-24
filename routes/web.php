@@ -43,11 +43,11 @@ Route::middleware('auth')->group(function() {
         Route::put('/', 'update')->name('.update');
     });  
     // Dashboard
-    Route::controller(DashboardController::class)->name('dashboard')->group(function () {
+    Route::middleware('role:admin')->controller(DashboardController::class)->name('dashboard')->group(function () {
         Route::get('/dashboard', 'index');
     });
     // Candidate
-    Route::resource('/candidate', CandidateController::class);
+    Route::resource('/candidate', CandidateController::class)->middleware('role:user');
 
     // Logout
     Route::post('/logout', [AuthController::class, 'logout'])->name('logout');

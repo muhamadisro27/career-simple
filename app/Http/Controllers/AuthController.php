@@ -28,12 +28,15 @@ class AuthController extends Controller
             'email' => 'required|email:dns',
             'password' => 'required'
        ]);
-
        if(Auth::attempt($credentials)) {
            $request->session()->regenerate();
-
-           return redirect()->intended('candidate');
-
+           $user = User::find(auth()->user()->id);
+           
+           if($user->hasRole('admin')) {
+               return redirect()->route('dashboard');
+           } else {
+               return redirect()->intended('candidate');
+           }
         }
         return redirect()->back()->with('loginFailed', 'User doesnt match in our records !');
     }
