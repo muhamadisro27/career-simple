@@ -21,34 +21,35 @@ use App\Http\Controllers\DashboardController;
 
 // Route Guest
 // Login
-Route::controller(AuthController::class)->group(function() {
-    Route::get('/', 'loginForm')->name('login-form');
-    Route::post('/', 'login')->name('login');
+Route::middleware('guest')->group(function() {
+    Route::controller(AuthController::class)->group(function() {
+        Route::get('/', 'loginForm')->name('login-form');
+        Route::post('/', 'login')->name('login');
+    });
+    // Register
+    Route::controller(AuthController::class)->group(function() {
+        Route::get('/register', '/registerForm')->name('register-form');
+        Route::post('/register', 'r/egister')->name('register');
+    });
+    // Job list
+    Route::get('job', [JobController::class, 'index'])->name('job');
 });
-// Register
-Route::controller(AuthController::class)->group(function() {
-    Route::get('register', 'registerForm')->name('register-form');
-    Route::post('register', 'register')->name('register');
-});
-// Job list
-Route::get('job', [JobController::class, 'index'])->name('job');
 
 // Route Auth
 Route::middleware('auth')->group(function() {
     // Profile
-    Route::controller(ProfileController::class)->name('profile')->group(function() {
-        Route::get('profile', 'index');
-        Route::get('profile', 'edit')->name('.edit');
-        Route::put('profile', 'update')->name('.update');
+    Route::controller(ProfileController::class)->prefix('profile')->name('profile')->group(function() {
+        Route::get('/', 'edit')->name('.edit');
+        Route::put('/', 'update')->name('.update');
     });  
     // Dashboard
     Route::controller(DashboardController::class)->name('dashboard')->group(function () {
-        Route::get('dashboard', 'index');
+        Route::get('/dashboard', 'index');
     });
     // Candidate
-    Route::resource('candidate', CandidateController::class);
+    Route::resource('/candidate', CandidateController::class);
 
     // Logout
-    Route::post('logout', [AuthController::class, 'logout'])->name('logout');
+    Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 });
 

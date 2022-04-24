@@ -32,21 +32,21 @@ class Profile extends Model
 
     public function academicRecord()
     {
-        return $this->hasMany(AcademicRecord::class);
+        return $this->hasOne(AcademicRecord::class);
     }
 
     public function trainingRecord()
     {
-        return $this->hasMany(TrainingRecord::class);
+        return $this->hasOne(TrainingRecord::class);
     }
 
     public function jobRecord()
     {
-        return $this->hasMany(JobRecord::class);
+        return $this->hasOne(JobRecord::class);
     }
 
     public function skill()
     {
-        return $this->hasMany(Skill::class);
+        return $this->hasOne(Skill::class);
     }
 }

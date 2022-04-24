@@ -1,12 +1,16 @@
 <div class="navbar-menu-wrapper d-flex align-items-top"> 
    <ul class="navbar-nav">
      <li class="nav-item font-weight-semibold d-none d-lg-block ms-0">
-       <h1 class="welcome-text">Welcome Back, <span class="text-black fw-bold">Muhamad Isro</span></h1>
+       @if (Route::has('login'))
+        @auth
+        <h1 class="welcome-text">Welcome Back, <span class="text-black fw-bold">{{ Auth::user()->name }}</span></h1>
+        @endauth
+       @endif
        <h3 class="welcome-sub-text">Apply for a job fast and easy</h3>
      </li>
    </ul>
    <ul class="navbar-nav ms-auto">
-     <li class="nav-item dropdown d-none d-lg-block">
+     {{-- <li class="nav-item dropdown d-none d-lg-block">
        <a class="nav-link dropdown-bordered dropdown-toggle dropdown-toggle-split" id="messageDropdown" href="#" data-bs-toggle="dropdown" aria-expanded="false"> Select Category </a>
        <div class="dropdown-menu dropdown-menu-right navbar-dropdown preview-list pb-0" aria-labelledby="messageDropdown">
          <a class="dropdown-item py-3" >
@@ -52,15 +56,15 @@
          <i class="icon-search"></i>
          <input type="search" class="form-control" placeholder="Search Here" title="Search here">
        </form>
-     </li>
+     </li> --}}
      <li class="nav-item dropdown d-none d-lg-block user-dropdown">
        <a class="nav-link" id="UserDropdown" href="#" data-bs-toggle="dropdown" aria-expanded="false">
          <img class="img-xs rounded-circle" src="{{ asset('images/faces/face8.jpg') }}" alt="Profile image"> </a>
        <div class="dropdown-menu dropdown-menu-right navbar-dropdown" aria-labelledby="UserDropdown">
          <div class="dropdown-header text-center">
            <img class="img-md rounded-circle" src="{{ asset('images/faces/face8.jpg') }}" alt="Profile image">
-           <p class="mb-1 mt-3 font-weight-semibold">Allen Moreno</p>
-           <p class="fw-light text-muted mb-0">allenmoreno@gmail.com</p>
+           <p class="mb-1 mt-3 font-weight-semibold">{{ Auth::user()->name }}</p>
+           <p class="fw-light text-muted mb-0">{{ Auth::user()->email }}</p>
          </div>
          <a href="{{ route('profile.edit') }}" class="dropdown-item"><i class="dropdown-item-icon mdi mdi-account-outline text-primary me-2"></i> My Profile</a>
          <form action="{{ route('logout') }}" method="post">

@@ -12,7 +12,7 @@ class TrainingRecord extends Model
     protected $fillable = [
         'profile_id',
         'course_name',
-        'is_sertificate',
+        'is_certificate',
         'year',
     ];
 
