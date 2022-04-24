@@ -30,6 +30,24 @@ class CandidateRepository implements CandidateInterface {
       return $response;
    }
 
+   public function jobCandidate()
+   {
+      try {
+         $applies = CandidateApply::with(['candidate.profile','job'])->latest()->paginate(10);
+
+         $response = [
+            'status' => 'success',
+            'applies' => $applies
+         ];
+      } catch (\Throwable $th) {
+         $response = [
+            'status' => 'failed',
+            'message' => $th->getMessage()
+         ];
+      }
+      return $response;
+   }
+
    public function apply($data)
    {
       

@@ -45,6 +45,7 @@ Route::middleware('auth')->group(function() {
     // Dashboard
     Route::middleware('role:admin')->controller(DashboardController::class)->name('dashboard')->group(function () {
         Route::get('/dashboard', 'index');
+        Route::get('/dashboard/candidate-detail/{candidate}', 'detail')->name('.detail_candidate');
     });
     // Candidate
     Route::middleware('role:user')->group(function() {

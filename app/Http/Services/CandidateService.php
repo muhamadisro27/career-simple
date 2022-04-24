@@ -16,6 +16,11 @@ class CandidateService implements CandidateInterface {
       return $this->candidateInterface->paginate();
    }
 
+   public function jobCandidate()
+   {
+      return $this->candidateInterface->jobCandidate();
+   }
+
    public function apply($data)
    {
       return $this->candidateInterface->apply($data);
