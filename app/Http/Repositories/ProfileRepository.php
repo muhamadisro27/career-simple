@@ -17,15 +17,11 @@ class ProfileRepository implements ProfileInterface {
    public function edit()
    {
       $data = [
-         'user' => Profile::with(['academicRecord','jobRecord','trainingRecord','skill'])->whereHas('academicRecord', function($q) {
-             $q->where(['profile_id' => auth()->user()->profile_id]);
-         })->whereHas('jobRecord', function($q) {
-             $q->where(['profile_id' => auth()->user()->profile_id]);
-         })->whereHas('trainingRecord', function($q) {
-             $q->where(['profile_id' => auth()->user()->profile_id]);
-         })->whereHas('skill', function($q) {
-             $q->where(['profile_id' => auth()->user()->profile_id]);
-         })->where(['id' => auth()->user()->profile_id])->first(),
+         'user' => Profile::where(['id' => auth()->user()->profile_id])->first(),
+         'academic' => AcademicRecord::where(['profile_id' => auth()->user()->profile_id])->first(),
+         'job' => JobRecord::where(['profile_id' => auth()->user()->profile_id])->first(),
+         'training' => TrainingRecord::where(['profile_id' => auth()->user()->profile_id])->first(),
+         'skill' => Skill::where(['profile_id' => auth()->user()->profile_id])->first(),
      ];
 
      return $data;
