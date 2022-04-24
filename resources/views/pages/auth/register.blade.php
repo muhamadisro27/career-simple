@@ -8,9 +8,9 @@
          <div class="col-lg-4 mx-auto">
            <div class="auth-form-light text-left py-5 px-4 px-sm-5">
              <h4 class="pb-3">Register Here!</h4>
-             @if (Session::has('error'))
+             @if (session()->has('failed'))
                <div class="alert alert-danger" role="alert">
-                  {{ Session::get('error') }}
+                  {{ session('failed') }}
                </div>
              @endif
              <form action="{{ route('register') }}" method="POST">

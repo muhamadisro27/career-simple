@@ -28,8 +28,8 @@ Route::middleware('guest')->group(function() {
     });
     // Register
     Route::controller(AuthController::class)->group(function() {
-        Route::get('/register', '/registerForm')->name('register-form');
-        Route::post('/register', 'r/egister')->name('register');
+        Route::get('/register', 'registerForm')->name('register-form');
+        Route::post('/register', 'register')->name('register');
     });
     // Job list
     Route::get('job', [JobController::class, 'index'])->name('job');

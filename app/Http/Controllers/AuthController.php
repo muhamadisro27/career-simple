@@ -35,7 +35,7 @@ class AuthController extends Controller
            return redirect()->intended('candidate');
 
         }
-        return redirect()->back()->with('login', 'Login failed');
+        return redirect()->back()->with('loginFailed', 'User doesnt match in our records !');
     }
 
     public function registerForm()
@@ -47,7 +47,7 @@ class AuthController extends Controller
     {
         $response = $this->authService->register($request->all());
 
-        return redirect('/profile')->with($response['status'], $response['message']);
+        return redirect('profile')->with($response['status'], $response['message']);
     }
 
     public function logout()

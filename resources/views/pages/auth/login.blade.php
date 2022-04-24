@@ -8,6 +8,11 @@
          <div class="col-lg-4 mx-auto">
            <div class="auth-form-light text-left py-5 px-4 px-sm-5">
              <h4>Hello! let's get started</h4>
+             @if (session()->has('loginFailed'))
+               <div class="alert alert-danger" role="alert">
+                  {{ session('loginFailed') }}
+               </div>
+             @endif
              <form action="{{ route('login') }}" method="post" class="pt-3">
               @csrf
                <div class="form-group">
