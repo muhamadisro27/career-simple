@@ -14,10 +14,10 @@
        <form action="{{ route('profile.update') }}" method="POST" class="form-sample">
          @method('PUT')
          @csrf
-         <input type="hidden" name="academic_id" value="{{ old('academic_id', $user->academicRecord->id) }}" />
-         <input type="hidden" name="job_id" value="{{ old('job_id', $user->jobRecord->id) }}" />
-         <input type="hidden" name="training_id" value="{{ old('training_id', $user->trainingRecord->id) }}" />
-         <input type="hidden" name="skill_id" value="{{ old('skill_id', $user->skill->id) }}" />
+         <input type="hidden" name="academic_id" value="{{ old('academic_id', $user ? $user->academicRecord->id : null) }}" />
+         <input type="hidden" name="job_id" value="{{ old('job_id', $user ? $user->jobRecord->id : null) }}" />
+         <input type="hidden" name="training_id" value="{{ old('training_id', $user ? $user->trainingRecord->id : null) }}" />
+         <input type="hidden" name="skill_id" value="{{ old('skill_id', $user ? $user->skill->id : null) }}" />
          <p class="card-description">
            Personal info
          </p>
@@ -27,7 +27,7 @@
              <div class="form-group row">
                <label class="col-sm-3 col-form-label">Name</label>
                <div class="col-sm-9">
-                 <input type="text" value="{{ old('name', $user->name ) }}" class="form-control" name="name" />
+                 <input type="text" value="{{ old('name', $user ? $user->name : null ) }}" class="form-control" name="name" />
                </div>
              </div>
            </div>
@@ -36,7 +36,7 @@
             <div class="form-group row">
               <label class="col-sm-5 col-form-label">ID Card Number</label>
               <div class="col-sm-7">
-                <input type="text" value="{{ old('id_card_number', $user->id_card_number ) }}" class="form-control" name="id_card_number" readonly />
+                <input type="text" value="{{ old('id_card_number', $user ? $user->id_card_number : null) }}" class="form-control" name="id_card_number" readonly />
               </div>
             </div>
           </div>
@@ -69,7 +69,7 @@
              <div class="form-group row">
                <label class="col-sm-3 col-form-label">Date of Birth</label>
                <div class="col-sm-9">
-                 <input type="date" value="{{ old('birthdate', $user->birthdate ) }}" class="form-control" name="birthdate" placeholder="dd/mm/yyyy"/>
+                 <input type="date" value="{{ old('birthdate', $user ? $user->birthdate : null ) }}" class="form-control" name="birthdate" placeholder="dd/mm/yyyy"/>
                </div>
              </div>
            </div>
@@ -80,7 +80,7 @@
             <div class="form-group row">
               <label class="col-sm-3 col-form-label">Birth of Place</label>
               <div class="col-sm-9">
-                <input type="text" class="form-control" name="birthplace" value="{{ old('birthplace', $user->birthplace ) }}" />
+                <input type="text" class="form-control" name="birthplace" value="{{ old('birthplace', $user ? $user->birthplace : null ) }}" />
               </div>
             </div>
           </div>
@@ -136,7 +136,7 @@
             <div class="form-group row">
               <label class="col-sm-3 col-form-label">Email</label>
               <div class="col-sm-9">
-                <input type="email" value="{{ old('email', $user->email ) }}" class="form-control" name="email" />
+                <input type="email" value="{{ old('email', $user ? $user->email : null ) }}" class="form-control" name="email" />
               </div>
             </div>
           </div>
@@ -145,7 +145,7 @@
            <div class="form-group row">
              <label class="col-sm-4 col-form-label">Phone Number</label>
              <div class="col-sm-8">
-               <input type="number" class="form-control" name="phone_number" value="{{ old('phone_number', $user->phone_number ) }}"/>
+               <input type="number" class="form-control" name="phone_number" value="{{ old('phone_number', $user ? $user->phone_number : null ) }}"/>
              </div>
            </div>
          </div>
@@ -159,7 +159,7 @@
              <div class="form-group row">
                <label class="col-sm-3 col-form-label">Address</label>
                <div class="col-sm-9">
-                 <input type="text" name="address" class="form-control" value="{{ old('address', $user->address ) }}" />
+                 <input type="text" name="address" class="form-control" value="{{ old('address', $user ? $user->address : null ) }}" />
                </div>
              </div>
            </div>
@@ -168,7 +168,7 @@
              <div class="form-group row">
                <label class="col-sm-3 col-form-label">Address Domicile</label>
                <div class="col-sm-9">
-                 <input type="text" name="address_domicile" value="{{ old('address_domicile', $user->address_domicile ) }}" class="form-control" />
+                 <input type="text" name="address_domicile" value="{{ old('address_domicile', $user ? $user->address_domicile : null ) }}" class="form-control" />
                </div>
              </div>
            </div>
@@ -178,7 +178,7 @@
              <div class="form-group row">
                <label class="col-sm-3 col-form-label">Contact Closest Person</label>
                <div class="col-sm-9">
-                 <input type="number" name="closest_person" class="form-control" value="{{ old('closest_person', $user->closest_person ) }}" />
+                 <input type="number" name="closest_person" class="form-control" value="{{ old('closest_person', $user ? $user->closest_person : null ) }}" />
                </div>
              </div>
            </div>
@@ -207,7 +207,7 @@
              <div class="form-group row">
                <label class="col-sm-3 col-form-label">Institution Name</label>
                <div class="col-sm-9">
-                 <input type="text" name="institution_name" value="{{ old('institution_name', $user->academicRecord->institution_name) }}" class="form-control" />
+                 <input type="text" name="institution_name" value="{{ old('institution_name', $user ? $user->academicRecord->institution_name : null) }}" class="form-control" />
                </div>
              </div>
            </div>
@@ -218,7 +218,7 @@
               <div class="form-group row">
                 <label class="col-sm-3 col-form-label">Major</label>
                 <div class="col-sm-9">
-                  <input type="text" name="major" value="{{ old('major', $user->academicRecord->major) }}" class="form-control" />
+                  <input type="text" name="major" value="{{ old('major', $user ? $user->academicRecord->major : null) }}" class="form-control" />
                 </div>
               </div>
             </div>
@@ -227,7 +227,7 @@
              <div class="form-group row">
                <label class="col-sm-3 col-form-label">Graduation Year</label>
                <div class="col-sm-9">
-                 <input type="text" name="academic_year" value="{{ old('academic_year', $user->academicRecord->graduation_year) }}" class="form-control" />
+                 <input type="text" name="academic_year" value="{{ old('academic_year', $user ? $user->academicRecord->graduation_year : null) }}" class="form-control" />
                </div>
              </div>
            </div>
@@ -238,7 +238,7 @@
               <div class="form-group row">
                 <label class="col-sm-3 col-form-label">GPA</label>
                 <div class="col-sm-9">
-                  <input type="text" name="gpa" value="{{ old('gpa', $user->academicRecord->gpa) }}" class="form-control" />
+                  <input type="text" name="gpa" value="{{ old('gpa', $user ? $user->academicRecord->gpa : null) }}" class="form-control" />
                 </div>
               </div>
             </div>
@@ -252,7 +252,7 @@
             <div class="form-group row">
               <label class="col-sm-3 col-form-label">Company Name</label>
               <div class="col-sm-9">
-                <input type="text" name="company_name" value="{{ old('company_name', $user->jobRecord->company_name) }}" class="form-control" />
+                <input type="text" name="company_name" value="{{ old('company_name', $user ? $user->jobRecord->company_name : null) }}" class="form-control" />
               </div>
             </div>
           </div>
@@ -261,7 +261,7 @@
              <div class="form-group row">
                <label class="col-sm-3 col-form-label">Last Position</label>
                <div class="col-sm-9">
-                 <input type="text" name="last_position" value="{{ old('last_position', $user->jobRecord->last_position) }}" class="form-control" />
+                 <input type="text" name="last_position" value="{{ old('last_position', $user ? $user->jobRecord->last_position : null) }}" class="form-control" />
                </div>
              </div>
            </div>
@@ -272,7 +272,7 @@
               <div class="form-group row">
                 <label class="col-sm-3 col-form-label">Last Income</label>
                 <div class="col-sm-9">
-                  <input type="number" name="last_income" value="{{ old('last_income', $user->jobRecord->last_income) }}" class="form-control" />
+                  <input type="number" name="last_income" value="{{ old('last_income', $user ? $user->jobRecord->last_income : null) }}" class="form-control" />
                 </div>
               </div>
             </div>
@@ -281,7 +281,7 @@
              <div class="form-group row">
                <label class="col-sm-3 col-form-label">Year</label>
                <div class="col-sm-9">
-                 <input type="text" name="job_year" value="{{ old('job_year', $user->jobRecord->year) }}" class="form-control" />
+                 <input type="text" name="job_year" value="{{ old('job_year', $user ? $user->jobRecord->year : null) }}" class="form-control" />
                </div>
              </div>
            </div>
@@ -295,7 +295,7 @@
               <div class="form-group row">
                 <label class="col-sm-3 col-form-label">Course Name</label>
                 <div class="col-sm-9">
-                  <input type="text" name="course_name" value="{{ old('course_name', $user->trainingRecord->course_name) }}" class="form-control" />
+                  <input type="text" name="course_name" value="{{ old('course_name', $user ? $user->trainingRecord->course_name : null) }}" class="form-control" />
                 </div>
               </div>
             </div>
@@ -318,7 +318,7 @@
              <div class="form-group row">
                <label class="col-sm-3 col-form-label">Year</label>
                <div class="col-sm-9">
-                 <input type="text" name="training_year" value="{{ old('training_year', $user->trainingRecord->year) }}" class="form-control" />
+                 <input type="text" name="training_year" value="{{ old('training_year', $user ? $user->trainingRecord->year : null) }}" class="form-control" />
                </div>
              </div>
            </div>
@@ -332,7 +332,7 @@
               <div class="form-group row">
                 <label class="col-sm-3 col-form-label">Skill</label>
                 <div class="col-sm-9">
-                  <input type="text" name="skill_title" value="{{ old('skill_title', $user->skill->title) }}" class="form-control" />
+                  <input type="text" name="skill_title" value="{{ old('skill_title', $user ? $user->skill->title : null) }}" class="form-control" />
                 </div>
               </div>
             </div>

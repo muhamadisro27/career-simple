@@ -32,7 +32,7 @@ class ProfileController extends Controller
     public function update(Request $request)
     {
         $response = $this->profileService->update($request->all());
-        // dd($response['message']);
+
         return redirect('/profile')->with($response['status'],$response['message']);
     }
 }

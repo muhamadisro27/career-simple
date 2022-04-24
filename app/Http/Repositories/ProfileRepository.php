@@ -25,7 +25,7 @@ class ProfileRepository implements ProfileInterface {
              $q->where(['profile_id' => auth()->user()->profile_id]);
          })->whereHas('skill', function($q) {
              $q->where(['profile_id' => auth()->user()->profile_id]);
-         })->where(['id' => auth()->user()->profile_id])->firstOrFail(),
+         })->where(['id' => auth()->user()->profile_id])->first(),
      ];
 
      return $data;
